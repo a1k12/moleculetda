@@ -31,7 +31,6 @@ def read_cif(filename: str) -> Tuple[np.ndarray, np.ndarray]:
     structure = Structure.from_file(filename)
     lattice_matrix = structure.lattice.matrix
     xyz = structure.cart_coords
-
     return (lattice_matrix, xyz)
 
 def read_xyz(filename: str):
@@ -47,7 +46,7 @@ def make_supercell(coords, lattice, size, min_size=-5) -> np.ndarray:
     Args:
         coords - matrix of xyz coordinates of the system
         lattice - lattice constants of the system
-        size - size of cubic cell, e.g., 10x10x10
+        size - dimension size of cubic cell, e.g., 10x10x10
         min_size - minimum axes size to keep negative xyz coordinates from the original cell
 
     Returns:
