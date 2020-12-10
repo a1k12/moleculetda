@@ -1,12 +1,11 @@
 [tool.poetry]
-name = "tda-for-science"
+name = "molecule-tda"
 version = "0.1.0"
 description = "Toolkit for using topological data analysis representations."
 authors = ["Aditi Krishnapriyan <akrishnapriyan@lbl.gov>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-pymatgen = "^2019.12"
 joblib = "^0.14.1"
 argh = "^0.26.2"
 dionysus = "^2.0"
@@ -17,6 +16,7 @@ numpy = "^1.18.1"
 tabulate = "^0.8.6"
 rich = "^2.2.3"
 pyclustering = "^0.9.3"
+pymatgen = "^2020.12.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^3.0"
