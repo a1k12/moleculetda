@@ -22,16 +22,31 @@ an example persistence diagram vectorization from a structure file
 
 ## Citing
 
-```
-Aditi S. Krishnapriyan, Maciej Haranczyk, Dmitriy Morozov. Topological Descriptors
-Help Predict Guest Adsorption in Nanoporous Materials. J. Phys. Chem. C (2020)
-```
-[doi](https://pubs.acs.org/doi/abs/10.1021/acs.jpcc.0c01167)
-
+[Aditi S. Krishnapriyan, Maciej Haranczyk, Dmitriy Morozov. Topological Descriptors
+Help Predict Guest Adsorption in Nanoporous Materials. J. Phys. Chem. C (2020)](https://pubs.acs.org/doi/abs/10.1021/acs.jpcc.0c01167)
 
 ```
-Aditi S. Krishnapriyan, Joseph Montoya, Maciej Haranczyk, Jens Hummelshoej.
+@article{doi:10.1021/acs.jpcc.0c01167,
+author = {Krishnapriyan, Aditi S. and Haranczyk, Maciej and Morozov, Dmitriy},
+title = {Topological Descriptors Help Predict Guest Adsorption in Nanoporous Materials},
+journal = {The Journal of Physical Chemistry C},
+volume = {124},
+number = {17},
+pages = {9360-9368},
+year = {2020},
+doi = {10.1021/acs.jpcc.0c01167},
+
+}
+```
+
+```
+@article{krishnapriyan2020persistent,
+  title={Persistent homology advances interpretable machine learning for nanoporous materials},
+  author={Krishnapriyan, Aditi S and Montoya, Joseph and Hummelsh{\o}j, Jens and Morozov, Dmitriy},
+  journal={arXiv preprint arXiv:2010.00532},
+  year={2020}
+}
+```
+[Aditi S. Krishnapriyan, Joseph Montoya, Maciej Haranczyk, Jens Hummelshoej.
 Persistence homology advances interpretable machine learning for nanoporous materials.
-Arxiv, 2010.00532.
-```
-[doi](https://arxiv.org/abs/2010.00532)
+Arxiv, 2010.00532 (2020)](https://arxiv.org/abs/2010.00532)
