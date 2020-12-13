@@ -23,7 +23,7 @@ an example persistence diagram vectorization from a structure file
 As an example, we will start with the following metal--organic framework (MOF) and
 construct topological summaries of all of the channels and voids in the structure:
 
-<img src="https://github.com/a1k12/molecule-tda/blob/main/figures/str_m4_o1_o1_acs_sym.10.png" width="750">
+<img src="https://github.com/a1k12/molecule-tda/blob/main/figures/str_m4_o1_o1_acs_sym.10.png" width="500">
 
 Persistence diagrams can be generated from an example structure file such as a .cif file.
 ```

@@ -23,11 +23,9 @@ setup(
     package_dir={"": "."},
     package_data={},
     install_requires=[
-        'argh==0.*,>=0.26.2', 'diode', 'dionysus==2.*,>=2.0.0',
-        'joblib==0.*,>=0.14.1', 'numpy==1.*,>=1.18.1',
+        'diode', 'dionysus==2.*,>=2.0.0', 'numpy==1.*,>=1.18.1',
         'pyclustering==0.*,>=0.9.3', 'pymatgen==2020.*,>=2020.12.3',
-        'rich==2.*,>=2.2.3', 'sklearn==0.*,>=0.0.0', 'tabulate==0.*,>=0.8.6',
-        'tqdm==4.*,>=4.40.0'
+        'sklearn==0.*,>=0.0.0'
     ],
     dependency_links=['git+https://github.com/mrzv/diode.git#egg=diode'],
     extras_require={"dev": ["pytest==3.*,>=3.0.0"]},
