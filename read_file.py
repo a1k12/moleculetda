@@ -7,10 +7,10 @@ from typing import Tuple
 def read_data(filename: str, size=None, supercell=False) -> np.ndarray:
     """
     Args:
-        filename - currently supports cif, .npy
+        filename: currently supports cif, .npy
         # TO DO: xyz, POSCAR; extended xyz
-        size - if creating a cubic supercell, size of the cell
-        supercell - if creating a supercell, only supported by ".cif" option for now
+        size: if creating a cubic supercell, size of the cell
+        supercell: if creating a supercell, only supported by ".cif" option for now
     """
     if filename.endswith('.cif'):
         if supercell:
@@ -22,8 +22,7 @@ def read_data(filename: str, size=None, supercell=False) -> np.ndarray:
         return np.load(filename)
     else:
         raise("Other file types not implemented.")
-
-    return None
+        return None
 
 def read_cif(filename: str) -> Tuple[np.ndarray, np.ndarray]:
     from pymatgen   import Structure
@@ -44,13 +43,13 @@ def make_supercell(coords, lattice, size, min_size=-5) -> np.ndarray:
     Generate cubic supercell of a given size.
 
     Args:
-        coords - matrix of xyz coordinates of the system
-        lattice - lattice constants of the system
-        size - dimension size of cubic cell, e.g., 10x10x10
-        min_size - minimum axes size to keep negative xyz coordinates from the original cell
+        coords: matrix of xyz coordinates of the system
+        lattice: lattice constants of the system
+        size: dimension size of cubic cell, e.g., 10x10x10
+        min_size: minimum axes size to keep negative xyz coordinates from the original cell
 
     Returns:
-        new_cell - supercell array
+        new_cell: supercell array
     """
     a, b, c = lattice
 

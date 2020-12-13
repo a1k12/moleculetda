@@ -17,27 +17,21 @@ def diagrams_to_arrays(dgms):
 
     return dgm_arrays
 
-def compute_bounds(dgm):
-    """
-    If setting bounds for vectorization, compute them here.
-    """
-    dgms = diagrams_to_arrays(dgm)
-
 class PersImage(TransformerMixin):
     """ Generate a persistence image. Modified version of "persim"; github.com/scikit-tda/persim
 
     Args:
-        pixels - Tuple that represents the number of pixels in the returned image along x (birth)
+        pixels: Tuple that represents the number of pixels in the returned image along x (birth)
         and y (persistence) axis; pair of ints like (int, int)
-        spread - standard deviation of the Gaussian kernel (float)
-        specs - dict with parameters for shape of image with respect to diagram domain, for images
+        spread: standard deviation of the Gaussian kernel (float)
+        specs: dict with parameters for shape of image with respect to diagram domain, for images
         to have a particular range, e.g.:
             { "maxB": float,
              "maxP": float,
              "minBD": float
             }
-        kernel_type - Gaussian kernel spread
-        weighting_type - weighing scheme for persistence points
+        kernel_type: Gaussian kernel spread
+        weighting_type: weighing scheme for persistence points
 
     Return:
         Vectorized persistence image
@@ -89,12 +83,18 @@ class PersImage(TransformerMixin):
         landscapes = [PersImage.to_landscape(dg) for dg in dgs]
 
         if not self.specs:
+            max_ls = []
+            for landscape in landscapes:
+                ls = np.vstack((landscape, np.zeros((1, 2))))
+                max_ls.append(np.max(ls, axis=0))
+            maxB, maxP = np.max(max_ls, axis=0)
             self.specs = {
-                "maxB": np.max([np.max(np.vstack((landscape, np.zeros((1, 2)))))
-                                 for landscape in landscapes] + [0]),
+                "maxB": maxB,
+                "maxP": maxP,
                 "minBD": np.min([np.min(np.vstack((landscape, np.zeros((1, 2)))))
                                  for landscape in landscapes] + [0]),
             }
+
         imgs = [self._transform(dgm) for dgm in landscapes]
 
         # Make sure we return one item.
@@ -139,7 +139,7 @@ class PersImage(TransformerMixin):
 
     def weighting(self, landscape=None):
         """ Define a weighting function,
-                for stability results to hold, the function must be 0 at y=0.
+            for stability results to hold, the function must be 0 at y=0.
         """
 
         if landscape is not None:
