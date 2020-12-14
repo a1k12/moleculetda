@@ -20,8 +20,12 @@ pip install .
 an example persistence diagram vectorization from a structure file
 (which can then be used in other tasks, e.g., fed into a machine learning algorithm).
 
-Persistence diagrams can be generated from an example structure file such as a .cif file:
+As an example, we will start with the following metal--organic framework (MOF) and
+construct topological summaries of all of the channels and voids in the structure:
 
+<img src="https://github.com/a1k12/molecule-tda/blob/main/figures/str_m4_o1_o1_acs_sym.10.png" width="750">
+
+Persistence diagrams can be generated from an example structure file such as a .cif file.
 ```
 from structure_to_vectorization import *
 import matplotlib.pyplot as plt
@@ -49,10 +53,10 @@ axes[1].set_ylabel('Death')
 axes[1].set_title('2D persistence diagram')
 plt.show()
 ```
-<img src="https://github.com/a1k12/figures/1d_2d_pers_diagrams.png" width="750">
+<img src="https://github.com/a1k12/molecule-tda/blob/main/figures/1d_2d_pers_diagrams.png" width="750">
 
 
-Starting from `arr_dgms` (array corresponding to the persistence diagrams), vectorized representations
+Starting from `arr_dgms` (dict storing the persistence diagrams), vectorized representations
 can be generated:
 ```
 # initialize parameters for the "image" representation:
@@ -89,7 +93,7 @@ axes[1].set_title('2D vectorization')
 plt.colorbar(twod, ax=axes[1])
 plt.show()
 ```
-<img src="https://github.com/a1k12/figures/1d_2d_pers_images.png" width="750">
+<img src="https://github.com/a1k12/molecule-tda/blob/main/figures/1d_2d_pers_images.png" width="750">
 
 The resulting 1d and 2d image representations can be used for other tasks.
 
