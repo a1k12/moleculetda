@@ -20,7 +20,7 @@ pip install .
 an example persistence diagram vectorization from a structure file
 (which can then be used in other tasks, e.g., fed into a machine learning algorithm).
 
-As an example, we will start with the following metal--organic framework (MOF) and
+As an example, we will start with the following metal-organic framework (MOF) and
 construct topological summaries of all of the channels and voids in the structure:
 
 <img src="https://github.com/a1k12/molecule-tda/blob/main/figures/str_m4_o1_o1_acs_sym.10.png" width="500">
@@ -57,7 +57,7 @@ plt.show()
 
 
 Starting from `arr_dgms` (dict storing the persistence diagrams), vectorized representations
-can be generated:
+can be generated. Axes units are the same as the units of the original structure file:
 ```
 # initialize parameters for the "image" representation:
 # spread: Gaussian spread of the kernel, pixels: size of representation (n, n),
@@ -80,13 +80,20 @@ fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(10, 4))
 reverse_1d = images[0][::-1, :]
 reverse_2d = images[1][::-1, :]
 
+ticklabels_x_1d, ticklabels_y_1d = tick_labels(dgm_1d, 50)
+ticklabels_x_2d, ticklabels_y_2d = tick_labels(dgm_2d, 50)
+
 oned = axes[0].imshow(reverse_1d, cmap=plt.cm.viridis_r)
 axes[0].invert_yaxis()
+axes[0].set_xticklabels(ticklabels_x_1d)
+axes[0].set_yticklabels(ticklabels_y_1d)
 axes[0].set_xlabel('Birth')
 axes[0].set_ylabel('Persistence')
 axes[0].set_title('1D vectorization')
 twod = axes[1].imshow(reverse_2d, cmap=plt.cm.viridis_r)
 axes[1].invert_yaxis()
+axes[1].set_xticklabels(ticklabels_x_2d)
+axes[1].set_yticklabels(ticklabels_y_2d)
 axes[1].set_xlabel('Birth')
 axes[1].set_ylabel('Persistence')
 axes[1].set_title('2D vectorization')

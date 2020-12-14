@@ -64,6 +64,30 @@ def main(filename, supercell_size=None, spread=0.15, weighting='identity', pixel
 
     return images
 
+def tick_labels(dgm, pixel_size):
+    """Convert image units to units of the persistence diagram.
+
+    Args:
+        dgm: Array containing (birth, death) points, output of "structure_to_pd function.
+        pixel_size: Pixel size resolution for the image (int).
+    """
+    max_birth = np.max(dgm['birth'])
+    max_persistence = np.max(dgm['death'] - dgm['birth'])
+
+    ticks = np.linspace(0, pixel_size, 6)
+
+    ticklabels_x = [(max_birth/pixel_size)*i for i in ticks]
+    ticklabels_y = [(max_persistence/pixel_size)*i for i in ticks]
+
+    ticklabels_x = [round(elem, 2) for elem in ticklabels_x]
+    ticklabels_y = [round(elem, 2) for elem in ticklabels_y]
+
+    # start from (0, 0)
+    ticklabels_x.insert(0, 0)
+    ticklabels_y.insert(0, 0)
+
+    return ticklabels_x, ticklabels_y
+
 if __name__ == '__main__':
     filename = 'files/mof_structs/str_m4_o1_o1_acs_sym.10.cif'
     images = main(filename, None, 0.15, 'identity', [50, 50])
