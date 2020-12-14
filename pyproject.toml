@@ -6,15 +6,10 @@ authors = ["Aditi Krishnapriyan <akrishnapriyan@lbl.gov>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-joblib = "^0.14.1"
-argh = "^0.26.2"
 dionysus = "^2.0"
 sklearn = "^0.0.0"
-tqdm = "^4.40"
 diode = {git = "https://github.com/mrzv/diode.git"}
 numpy = "^1.18.1"
-tabulate = "^0.8.6"
-rich = "^2.2.3"
 pyclustering = "^0.9.3"
 pymatgen = "^2020.12.3"
 

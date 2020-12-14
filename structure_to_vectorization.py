@@ -1,21 +1,8 @@
 """Example going from a structure to its vectorized persistence diagrams."""
 
-import argparse
 from read_file import *
 from construct_pd import *
 from vectorize_pds import *
-
-#############################
-# Possible user arguments
-#############################
-parser = argparse.ArgumentParser(description='molecule-tda')
-parser.add_argument('--filename', type=str, default=None)
-parser.add_argument('--supercell_size', default=None, \
-    help='Use if wanting all systems to be a certain cubic size. Only works if lattice constants exist.')
-# Vectorization parameters
-parser.add_argument('--spread', type=float, default=0.15, help='Gaussian spread for vectorizing persistence diagram transformation.')
-parser.add_argument('--weighting', type=str, help='Weighing scheme.')
-args = parser.parse_args()
 
 def structure_to_pd(filename, supercell_size):
     """Convert structure file to all dimensions of persistence diagrams.
