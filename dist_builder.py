@@ -21,6 +21,7 @@ class DistanceBuilder(MapBuilder):
         super().__init__(**kwargs)
         q = self.query or {}
         q.update({"migration_graph": {"$ne": None}})
+        self.query = q
 
     def get_items(self) -> Iterable:
         def modify_item(item):
