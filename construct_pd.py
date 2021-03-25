@@ -9,9 +9,9 @@ def construct_pds(coords, exact = True):
     """
     Coordinates to persistence diagrams.
     Args:
-        filename - file type with xyz data (.cif, etc.)
+        filename: file type with xyz data (.cif, etc.)
     Returns:
-        dgms - persistence diagram objects (dgms[0] is 0d, dgms[1] is 1d, etc.)
+        dgms: persistence diagram objects (dgms[0] is 0d, dgms[1] is 1d, etc.)
     """
     f = get_alpha_shapes(coords, exact)
     f = d.Filtration(f)
@@ -22,7 +22,7 @@ def construct_pds(coords, exact = True):
 def get_alpha_shapes(coords, exact = True):
     """
     Args:
-        coords - matrix with xyz data
+        coords: matrix with xyz data
     Returns:
         simplices
     """
@@ -31,9 +31,9 @@ def get_alpha_shapes(coords, exact = True):
 def get_persistence(f):
     """
     Args:
-        f - filtration
+        f: filtration
     Returns:
-        m - reduced boundary matrix
+        m: reduced boundary matrix
     """
     m = d.homology_persistence(f)
     return m

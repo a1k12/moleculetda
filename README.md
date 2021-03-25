@@ -34,24 +34,13 @@ import numpy as np
 filename = 'files/mof_structs/str_m4_o1_o1_acs_sym.10.cif'
 
 # return a dict containing persistence diagrams for different dimensions (1d - channels, 2d - voids)
-arr_dgms = structure_to_pd(filename, supercell_size=None)
+arr_dgms = structure_to_pd(filename, supercell_size=20)
 
 # plot out the 1d and 2d diagrams
 dgm_1d = arr_dgms['dim1']
 dgm_2d = arr_dgms['dim2']
 
-fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(10, 4))
-axes[0].scatter(dgm_1d['birth'], dgm_1d['death'])
-axes[0].plot([0, np.max(dgm_1d['death'])], [0, np.max(dgm_1d['death'])])
-axes[0].set_xlabel('Birth')
-axes[0].set_ylabel('Death')
-axes[0].set_title('1D persistence diagram')
-axes[1].scatter(dgm_2d['birth'], dgm_2d['death'])
-axes[1].plot([0, np.max(dgm_2d['death'])], [0, np.max(dgm_2d['death'])])
-axes[1].set_xlabel('Birth')
-axes[1].set_ylabel('Death')
-axes[1].set_title('2D persistence diagram')
-plt.show()
+plot_pds(dgm_1d, dgm_2d)
 ```
 <img src="https://github.com/a1k12/molecule-tda/blob/main/figures/1d_2d_pers_diagrams.png" width="750">
 
@@ -75,30 +64,7 @@ for dim in [1, 2]:
     dgm = arr_dgms[f"dim{dim}"]
     images.append(pd_vectorization(dgm, spread=0.15, weighting='identity', pixels=[50, 50]))
 
-fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(10, 4))
-
-reverse_1d = images[0][::-1, :]
-reverse_2d = images[1][::-1, :]
-
-ticklabels_x_1d, ticklabels_y_1d = tick_labels(dgm_1d, 50)
-ticklabels_x_2d, ticklabels_y_2d = tick_labels(dgm_2d, 50)
-
-oned = axes[0].imshow(reverse_1d, cmap=plt.cm.viridis_r)
-axes[0].invert_yaxis()
-axes[0].set_xticklabels(ticklabels_x_1d)
-axes[0].set_yticklabels(ticklabels_y_1d)
-axes[0].set_xlabel('Birth')
-axes[0].set_ylabel('Persistence')
-axes[0].set_title('1D vectorization')
-twod = axes[1].imshow(reverse_2d, cmap=plt.cm.viridis_r)
-axes[1].invert_yaxis()
-axes[1].set_xticklabels(ticklabels_x_2d)
-axes[1].set_yticklabels(ticklabels_y_2d)
-axes[1].set_xlabel('Birth')
-axes[1].set_ylabel('Persistence')
-axes[1].set_title('2D vectorization')
-plt.colorbar(twod, ax=axes[1])
-plt.show()
+plot_pers_images(images, arr_dgms)
 ```
 <img src="https://github.com/a1k12/molecule-tda/blob/main/figures/1d_2d_pers_images.png" width="750">
 
