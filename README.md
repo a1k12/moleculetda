@@ -70,6 +70,10 @@ plot_pers_images(images, arr_dgms)
 
 The resulting 1d and 2d image representations can be used for other tasks.
 
+## Coming soon
+
+Examples of using image representations in downstream tasks, and going from persistence diagrams directly to machine learning algorithms (without images).
+
 ## Citing
 
 [Aditi S. Krishnapriyan, Maciej Haranczyk, Dmitriy Morozov. Topological Descriptors
@@ -94,7 +98,7 @@ Arxiv, 2010.00532 (2020)](https://arxiv.org/abs/2010.00532)
 
 ```
 @article{krishnapriyan2020persistent,
-  title={Persistent homology advances interpretable machine learning for nanoporous materials},
+  title={Machine learning with persistent homology and chemical word embeddings improves prediction accuracy and interpretability in metal-organic frameworks},
   author={Krishnapriyan, Aditi S and Montoya, Joseph and Haranczyk, Maciej and Hummelsh{\o}j, Jens and Morozov, Dmitriy},
   journal={arXiv preprint arXiv:2010.00532},
   year={2020}
