@@ -93,7 +93,7 @@ doi = {10.1021/acs.jpcc.0c01167},
 }
 ```
 [Aditi S. Krishnapriyan, Joseph Montoya, Maciej Haranczyk, Jens Hummelshoej, Dmitriy Morozov.
-Persistence homology advances interpretable machine learning for nanoporous materials.
+Machine learning with persistent homology and chemical word embeddings improves prediction accuracy and interpretability in metal-organic frameworks.
 Arxiv, 2010.00532 (2020)](https://arxiv.org/abs/2010.00532)
 
 ```
