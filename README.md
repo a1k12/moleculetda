@@ -88,8 +88,7 @@ doi = {10.1021/acs.jpcc.0c01167},
 
 }
 ```
-[Aditi S. Krishnapriyan, Joseph Montoya, Maciej Haranczyk, Jens Hummelshoej, Dmitriy Morozov. Machine learning with persistent homology and chemical word embeddings improves predictive accuracy and interpretability in metal--organic frameworks. Scientific Reports (2021)] (https://www.nature.com/articles/s41598-021-88027-8)
-
+[Aditi S. Krishnapriyan, Joseph Montoya, Maciej Haranczyk, Jens Hummelshoej, Dmitriy Morozov. Machine learning with persistent homology and chemical word embeddings improves predictive accuracy and interpretability in metal--organic frameworks. Scientific Reports (2021)](https://www.nature.com/articles/s41598-021-88027-8)
 ```
 @article{krishnapriyan_machine_2021,
   title={Machine learning with persistent homology and chemical word embeddings improves prediction accuracy and interpretability in metal-organic frameworks},
