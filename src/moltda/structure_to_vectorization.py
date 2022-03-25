@@ -1,10 +1,11 @@
 """Example going from a structure to its vectorized persistence diagrams."""
 
-from .read_file import read_data
-from .construct_pd import *
-from .vectorize_pds import *
-from typing import Union
 from pathlib import Path
+from typing import Union
+
+from .construct_pd import construct_pds
+from .read_file import read_data
+from .vectorize_pds import PersImage
 
 
 def structure_to_pd(filename: Union[str, Path], supercell_size):
@@ -46,18 +47,14 @@ def pd_vectorization(dgm, spread, weighting, pixels):
         downstream tasks like machine learning, etc.
     """
 
-    pim = PersImage(
-        spread=spread, pixels=pixels, weighting_type=weighting, verbose=False
-    )
+    pim = PersImage(spread=spread, pixels=pixels, weighting_type=weighting, verbose=False)
 
     image = pim.transform([(x["birth"], x["death"]) for x in dgm])
 
     return image  # vectorized persistence image
 
 
-def main(
-    filename, supercell_size=None, spread=0.15, weighting="identity", pixels=[50, 50]
-):
+def main(filename, supercell_size=None, spread=0.15, weighting="identity", pixels=[50, 50]):
     """Structure file to vectorized persistence diagram presentation.
 
     Currently returns a list with the 1D and 2D persistence diagrams of a structure.
@@ -70,8 +67,3 @@ def main(
         images.append(pd_vectorization(dgm, spread, weighting, pixels))
 
     return images
-
-
-if __name__ == "__main__":
-    filename = "files/mof_structs/str_m4_o1_o1_acs_sym.10.cif"
-    images = main(filename, None, 0.15, "identity", [50, 50])

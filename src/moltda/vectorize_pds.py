@@ -1,24 +1,32 @@
 """Calls that can vectorize a PD, such as to be used in an ML algorithm."""
 
-import numpy as np
+import collections
+from typing import Tuple
 
+import numpy as np
+from loguru import logger
 from scipy.stats import multivariate_normal as mvn
 from scipy.stats import norm
 from sklearn.base import TransformerMixin
-import collections
+
 
 def diagrams_to_arrays(dgms):
     """
     Convert persistence diagram objects to persistence diagram arrays.
     """
-    dgm_dtype  = np.dtype([('birth', 'f4'), ('death', 'f4'), ('data', 'u4')])
-    dgm_arrays = { f"dim{dim}" : np.array([(np.sqrt(p.birth), np.sqrt(p.death), p.data) \
-        for p in dgm], dtype = dgm_dtype) for dim, dgm in enumerate(dgms) }
+    dgm_dtype = np.dtype([("birth", "f4"), ("death", "f4"), ("data", "u4")])
+    dgm_arrays = {
+        f"dim{dim}": np.array(
+            [(np.sqrt(p.birth), np.sqrt(p.death), p.data) for p in dgm], dtype=dgm_dtype
+        )
+        for dim, dgm in enumerate(dgms)
+    }
 
     return dgm_arrays
 
+
 class PersImage(TransformerMixin):
-    """ Generate a persistence image. Modified version of "persim"; github.com/scikit-tda/persim
+    """Generate a persistence image. Modified version of "persim"; github.com/scikit-tda/persim
 
     Args:
         pixels: Tuple that represents the number of pixels in the returned image along x (birth)
@@ -39,12 +47,11 @@ class PersImage(TransformerMixin):
 
     def __init__(
         self,
-        pixels=(50, 50),
-        spread=0.15,
+        pixels: Tuple[int, int] = (50, 50),
+        spread: float = 0.15,
         specs=None,
         kernel_type="gaussian",
         weighting_type="identity",
-        verbose=True,
     ):
 
         self.specs = specs
@@ -53,15 +60,14 @@ class PersImage(TransformerMixin):
         self.spread = spread
         self.nx_b, self.ny_p = pixels
 
-        if verbose:
-            print(
-                'PersImage(pixels={}, spread={}, specs={}, kernel_type="{}", weighting_type="{}")'.format(
-                    pixels, spread, specs, kernel_type, weighting_type
-                )
+        logger.info(
+            'PersImage(pixels={}, spread={}, specs={}, kernel_type="{}", weighting_type="{}")'.format(
+                pixels, spread, specs, kernel_type, weighting_type
             )
+        )
 
     def transform(self, diagrams: np.array):
-        """ Convert diagram or list of diagrams to a persistence image.
+        """Convert diagram or list of diagrams to a persistence image.
 
         Args:
             diagrams - list (or multiple) persistence diagrams [(birth, death)]
@@ -91,8 +97,10 @@ class PersImage(TransformerMixin):
             self.specs = {
                 "maxB": maxB,
                 "maxP": maxP,
-                "minBD": np.min([np.min(np.vstack((landscape, np.zeros((1, 2)))))
-                                 for landscape in landscapes] + [0]),
+                "minBD": np.min(
+                    [np.min(np.vstack((landscape, np.zeros((1, 2))))) for landscape in landscapes]
+                    + [0]
+                ),
             }
 
         imgs = [self._transform(dgm) for dgm in landscapes]
@@ -105,8 +113,8 @@ class PersImage(TransformerMixin):
 
     def _transform(self, landscape):
         # Define an NxN grid over our landscape
-        maxB = self.specs["maxB"] # maximum birth in the range
-        maxP = self.specs["maxP"] # maximum persistence in the range
+        maxB = self.specs["maxB"]  # maximum birth in the range
+        maxP = self.specs["maxP"]  # maximum persistence in the range
         minBD = min(self.specs["minBD"], 0)  # at least show 0, maybe lower
 
         # Different bins for x and y axis: x by birth, y by persistence
@@ -127,19 +135,15 @@ class PersImage(TransformerMixin):
         # Implement this as a `summed-area table` - it'll be way faster
         spread = self.spread if self.spread else dx_b
         for point in landscape:
-            x_smooth = norm.cdf(xs_upper, point[0], spread) - norm.cdf(
-                xs_lower, point[0], spread
-            )
-            y_smooth = norm.cdf(ys_upper, point[1], spread) - norm.cdf(
-                ys_lower, point[1], spread
-            )
+            x_smooth = norm.cdf(xs_upper, point[0], spread) - norm.cdf(xs_lower, point[0], spread)
+            y_smooth = norm.cdf(ys_upper, point[1], spread) - norm.cdf(ys_lower, point[1], spread)
             img += np.outer(x_smooth, y_smooth) * weighting(point)
         img = img.T[::-1]
         return img
 
     def weighting(self, landscape=None):
-        """ Define a weighting function,
-            for stability results to hold, the function must be 0 at y=0.
+        """Define a weighting function,
+        for stability results to hold, the function must be 0 at y=0.
         """
 
         if landscape is not None:
@@ -157,15 +161,16 @@ class PersImage(TransformerMixin):
             # identity function, no weighing
             return 1
 
-        if self.weighting_type == 'identity':
+        if self.weighting_type == "identity":
             return identity
 
         return linear
 
     def kernel(self, spread=1):
-        """ Return the kernel for the transformation.
-            (ndarray size NxM, ndarray size 1xM) -> ndarray size Nx1
+        """Return the kernel for the transformation.
+        (ndarray size NxM, ndarray size 1xM) -> ndarray size Nx1
         """
+
         def gaussian(data, pixel):
             return mvn.pdf(data, mean=pixel, cov=spread)
 
@@ -173,8 +178,8 @@ class PersImage(TransformerMixin):
 
     @staticmethod
     def to_landscape(diagram):
-        """ Convert a diagram to a landscape
-            (b,d) -> (b, d-b)
+        """Convert a diagram to a landscape
+        (b,d) -> (b, d-b)
         """
         diagram[:, 1] -= diagram[:, 0]
 

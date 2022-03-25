@@ -1,9 +1,10 @@
 """Construct persistence diagram from a "point cloud" (represented as an array)."""
 
-import numpy as np
+from typing import Tuple
+
 import diode
 import dionysus as d
-from typing import Tuple
+import numpy as np
 
 
 def construct_pds(coords: np.ndarray, exact: bool = True) -> Tuple[d.Diagram]:

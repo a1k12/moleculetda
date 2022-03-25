@@ -1,10 +1,11 @@
 """
 Read the appropriate file type and transform accordingly to point cloud data.
 """
-import numpy as np
-from typing import Tuple, Union
 from pathlib import Path
-from pymatgen.core import Structure, Molecule
+from typing import Tuple, Union
+
+import numpy as np
+from pymatgen.core import Molecule, Structure
 
 
 def read_data(
@@ -44,15 +45,17 @@ def read_xyz(filename: Union[str, Path]):
     return coords
 
 
-def make_supercell(coords, lattice, size, min_size=-5) -> np.ndarray:
+def make_supercell(
+    coords: np.ndarray, lattice: Tuple[float, float, float], size: float, min_size: float = -5
+) -> np.ndarray:
     """
     Generate cubic supercell of a given size.
 
     Args:
-        coords: matrix of xyz coordinates of the system
-        lattice: lattice constants of the system
-        size: dimension size of cubic cell, e.g., 10x10x10
-        min_size: minimum axes size to keep negative xyz coordinates from the original cell
+        coords (np.ndarray): matrix of xyz coordinates of the system
+        lattice (Tuple[float, float, float]): lattice constants of the system
+        size (float): dimension size of cubic cell, e.g., 10x10x10
+        min_size (float): minimum axes size to keep negative xyz coordinates from the original cell
 
     Returns:
         new_cell: supercell array
@@ -61,12 +64,8 @@ def make_supercell(coords, lattice, size, min_size=-5) -> np.ndarray:
 
     xyz_periodic_copies = []
     xyz_periodic_copies.append(coords)
-    min_range = (
-        -3
-    )  # we aren't going in the minimum direction too much, so can make this small
-    max_range = (
-        20  # make this large enough, but can modify if wanting an even larger cell
-    )
+    min_range = -3  # we aren't going in the minimum direction too much, so can make this small
+    max_range = 20  # make this large enough, but can modify if wanting an even larger cell
 
     for x in range(-min_range, max_range):
         for y in range(0, max_range):
