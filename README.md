@@ -8,18 +8,15 @@ downstream tasks.
 
 ## Examples
 
-`structure_to_vectorization.py` contains functions that allow generating
-an example persistence diagram vectorization from a structure file
-(which can then be used in other tasks, e.g., fed into a machine learning algorithm).
-
 As an example, we will start with the following metal-organic framework (MOF) and
-construct topological summaries of all of the channels and voids in the structure:
+construct topological summaries of all the channels and voids in the structure:
 
 <img src="https://github.com/a1k12/molecule-tda/blob/main/figures/str_m4_o1_o1_acs_sym.10.png" width="500">
 
-Persistence diagrams can be generated from an example structure file such as a .cif file.
-```
-from structure_to_vectorization import *
+Persistence diagrams can be generated from an example structure file such as a `.cif` file.
+
+```python
+from moltda.structure_to_vectorization import structure_to_pd
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -34,16 +31,20 @@ dgm_2d = arr_dgms['dim2']
 
 plot_pds(dgm_1d, dgm_2d)
 ```
+ ̰
 <img src="https://github.com/a1k12/molecule-tda/blob/main/figures/1d_2d_pers_diagrams.png" width="750">
 
 
 Starting from `arr_dgms` (dict storing the persistence diagrams), vectorized representations
 can be generated. Axes units are the same as the units of the original structure file:
-```
+
+```python
 # initialize parameters for the "image" representation:
 # spread: Gaussian spread of the kernel, pixels: size of representation (n, n),
 # weighting_type: how to weigh the persistence diagram points
 # Optional: specs can be provided to give bounds on the representation
+from moltda.vectorize_pds import PersImage
+from moltda.plotting import plot_per_images
 
 pim = PersImage(spread=0.15,
             pixels=[50, 50],
@@ -58,6 +59,7 @@ for dim in [1, 2]:
 
 plot_pers_images(images, arr_dgms)
 ```
+
 <img src="https://github.com/a1k12/molecule-tda/blob/main/figures/1d_2d_pers_images.png" width="750">
 
 The resulting 1d and 2d image representations can be used for other tasks.
