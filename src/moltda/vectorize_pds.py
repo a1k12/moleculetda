@@ -172,10 +172,14 @@ class PersImage(TransformerMixin):
         (ndarray size NxM, ndarray size 1xM) -> ndarray size Nx1
         """
 
-        def gaussian(data, pixel):
-            return mvn.pdf(data, mean=pixel, cov=spread)
+        if self.kernel_type == "gaussian":
 
-        return gaussian
+            def gaussian(data, pixel):
+                return mvn.pdf(data, mean=pixel, cov=spread)
+
+            return gaussian
+
+        raise NotImplementedError("Kernel type {} not implemented".format(self.kernel_type))
 
     @staticmethod
     def to_landscape(diagram):
