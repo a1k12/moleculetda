@@ -3,13 +3,14 @@
 import numpy as np
 import diode
 import dionysus as d
-from read_file import *
+from typing import Tuple
 
-def construct_pds(coords, exact = True):
+
+def construct_pds(coords: np.ndarray, exact: bool = True) -> Tuple[d.Diagram]:
     """
     Coordinates to persistence diagrams.
     Args:
-        filename: file type with xyz data (.cif, etc.)
+        coords (np.ndarray): point cloud represented as an array
     Returns:
         dgms: persistence diagram objects (dgms[0] is 0d, dgms[1] is 1d, etc.)
     """
@@ -19,16 +20,18 @@ def construct_pds(coords, exact = True):
     dgms = d.init_diagrams(m, f)
     return dgms
 
-def get_alpha_shapes(coords, exact = True):
+
+def get_alpha_shapes(coords: np.ndarray, exact=True):
     """
     Args:
-        coords: matrix with xyz data
+        coords (np.ndarray): matrix with xyz data
     Returns:
         simplices
     """
-    return diode.fill_alpha_shapes(coords[:,:3], exact = exact)
+    return diode.fill_alpha_shapes(coords[:, :3], exact=exact)
 
-def get_persistence(f):
+
+def get_persistence(f: d.Filtration):
     """
     Args:
         f: filtration

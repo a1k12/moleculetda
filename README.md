@@ -1,18 +1,10 @@
-# molecule-tda
+# moltda
 A framework to use topological data analysis to extract topological information
 from a structure (e.g., molecule or crystal), which can then be used in
 downstream tasks.
 
 ## Installation
 
-Installation of all necessary packages can either be done via `poetry` or through
-setup.py. All required packages are in requirements.txt. For example:
-
-```
-git clone git@github.com:a1k12/molecule-tda.git
-cd molecule-tda
-pip install .
-```
 
 ## Examples
 
@@ -70,7 +62,7 @@ plot_pers_images(images, arr_dgms)
 
 The resulting 1d and 2d image representations can be used for other tasks.
 
-## Citing
+## Citation
 
 [Aditi S. Krishnapriyan, Maciej Haranczyk, Dmitriy Morozov. Topological Descriptors
 Help Predict Guest Adsorption in Nanoporous Materials. J. Phys. Chem. C (2020)](https://pubs.acs.org/doi/abs/10.1021/acs.jpcc.0c01167)
