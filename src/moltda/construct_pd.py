@@ -12,6 +12,7 @@ def construct_pds(coords: np.ndarray, exact: bool = True) -> Tuple[d.Diagram]:
     Coordinates to persistence diagrams.
     Args:
         coords (np.ndarray): point cloud represented as an array
+        exact (bool): if True, use exact alpha shapes
     Returns:
         dgms: persistence diagram objects (dgms[0] is 0d, dgms[1] is 1d, etc.)
     """

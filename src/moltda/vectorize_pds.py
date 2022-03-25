@@ -69,7 +69,7 @@ class PersImage(TransformerMixin):
         self.spread = spread
         self.nx_b, self.ny_p = pixels
 
-        logger.info(
+        logger.debug(
             'PersImage(pixels={}, spread={}, specs={}, kernel_type="{}", weighting_type="{}")'.format(
                 pixels, spread, specs, kernel_type, weighting_type
             )
