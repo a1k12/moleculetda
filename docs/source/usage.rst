@@ -22,6 +22,14 @@ Vectorize Persistence Diagrams
     :members:
 
 
+
+Directly going from structure to vectorized persistence diagram
+------------------------------------------------------
+
+.. automodule:: moltda.structure_to_vectorization
+    :members:
+
+
 Plotting
 ----------
 
