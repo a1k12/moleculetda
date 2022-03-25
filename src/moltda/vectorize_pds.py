@@ -165,7 +165,12 @@ class PersImage(TransformerMixin):
         if self.weighting_type == "identity":
             return identity
 
-        return linear
+        if self.weighting_type == "linear":
+            return linear
+
+        raise NotImplementedError(
+            'Weighting type "{}" not implemented.'.format(self.weighting_type)
+        )
 
     def kernel(self, spread=1):
         """Return the kernel for the transformation.
