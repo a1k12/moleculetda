@@ -2,7 +2,7 @@
  such as to be used in an ML algorithm."""
 
 import collections
-from typing import Tuple
+from typing import List, Tuple
 
 import numpy as np
 from loguru import logger
@@ -24,6 +24,14 @@ def diagrams_to_arrays(dgms):
     }
 
     return dgm_arrays
+
+
+def get_images(pd, spread: float = 0.2, weighting: str = "identity", pixels: List[int] = [50, 50]):
+    images = []
+    for dim in [0, 1, 2, 3]:
+        dgm = pd[f"dim{dim}"]
+        images.append(pd_vectorization(dgm, spread=spread, weighting=weighting, pixels=pixels))
+    return images
 
 
 class PersImage(TransformerMixin):

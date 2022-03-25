@@ -1,12 +1,13 @@
 from ast import dump
-import click
-from loguru import logger
 from pathlib import Path
 
+import click
+from loguru import logger
+
 from .construct_pd import construct_pds
+from .io import dump_json
 from .read_file import read_data
 from .vectorize_pds import diagrams_to_arrays, pd_vectorization
-from .io import dump_json
 
 
 @click.command("cli")
