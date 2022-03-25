@@ -19,13 +19,14 @@ def read_data(
         size (Tuple[int], None): if creating a cubic supercell, size of the cell. Defaults to None
         supercell (bool): if creating a supercell, only supported by ".cif" option for now
     """
-    if filename.endswith(".cif"):
+    filename = Path(filename)
+    if filename.suffix == ".cif":
         if supercell:
             lattice_matrix, xyz = read_cif(filename)
             return make_supercell(xyz, lattice_matrix, size)
         else:
             return read_cif(filename)[1]  # xyz coordinates
-    elif filename.endswith(".npy"):
+    elif filename.suffix == ".npy":
         return np.load(filename)
     else:
         raise NotImplementedError("Other file types not implemented.")

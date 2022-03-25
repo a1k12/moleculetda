@@ -25,11 +25,11 @@ from .io import dump_json
     help="Gaussian spread for vectorizing persistence diagram transformation.",
     type=click.FLOAT,
 )
-def main(file, supercell_size, spread):
+def main(filename, supercell_size, spread):
     """
     Convert a molecule/structurefile to vecotrized persistence diagrams.
     """
-    file = Path(file)
+    file = Path(filename)
     sc = True if supercell_size else False
     coords = read_data(file, size=supercell_size, supercell=sc)
     dgms = construct_pds(coords)
@@ -38,7 +38,7 @@ def main(file, supercell_size, spread):
 
     images = []
     for dim in [0, 1, 2, 3]:
-        dgm = dgms[f"dim{dim}"]
+        dgm = np_dgms[f"dim{dim}"]
         images.append(pd_vectorization(dgm, spread=spread, weighting="identity", pixels=[50, 50]))
 
     result = {
