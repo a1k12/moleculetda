@@ -1,9 +1,12 @@
+from ast import dump
 import click
 from loguru import logger
+from pathlib import Path
 
 from .construct_pd import construct_pds
 from .read_file import read_data
-from .vectorize_pds import diagrams_to_arrays
+from .vectorize_pds import diagrams_to_arrays, pd_vectorization
+from .io import dump_json
 
 
 @click.command("cli")
@@ -22,17 +25,25 @@ from .vectorize_pds import diagrams_to_arrays
     help="Gaussian spread for vectorizing persistence diagram transformation.",
     type=click.FLOAT,
 )
-def file2diagrams(file, supercell_size, spread):
+def main(file, supercell_size, spread):
     """
     Convert a molecule/structurefile to vecotrized persistence diagrams.
     """
+    file = Path(file)
     sc = True if supercell_size else False
     coords = read_data(file, size=supercell_size, supercell=sc)
     dgms = construct_pds(coords)
 
     np_dgms = diagrams_to_arrays(dgms)
-    print(np_dgms)
-    # separate dgms into 0D, 1D, 2D
-    dgm_0d = np_dgms["dim0"]
-    dgm_1d = np_dgms["dim1"]
-    dgm_2d = np_dgms["dim2"]
+
+    images = []
+    for dim in [0, 1, 2, 3]:
+        dgm = dgms[f"dim{dim}"]
+        images.append(pd_vectorization(dgm, spread=spread, weighting="identity", pixels=[50, 50]))
+
+    result = {
+        "diagrams": np_dgms,
+        "images": images,
+    }
+
+    dump_json(result, f"{file.stem}_result.json")
