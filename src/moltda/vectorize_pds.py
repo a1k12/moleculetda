@@ -10,7 +10,7 @@ from scipy.stats import multivariate_normal as mvn
 from scipy.stats import norm
 from sklearn.base import TransformerMixin
 
-__all__ = ["diagrams_to_arrays", "PersImage"]
+__all__ = ["diagrams_to_arrays", "PersImage", "pd_vectorization"]
 
 
 def diagrams_to_arrays(dgms):
@@ -185,3 +185,27 @@ class PersImage(TransformerMixin):
         diagram[:, 1] -= diagram[:, 0]
 
         return diagram
+
+
+def pd_vectorization(dgm, spread, weighting, pixels):
+    """
+    Convert persistence diagram array to a vectorized representation.
+
+    Optional: Can add custom specs for scaling the persistence image.
+
+    Args:
+        dgm: Array containing (b, d) points of a persistence diagram.
+        spread: Gaussian spread.
+        weighting: Scheme for weighting points in the persistence diagram.
+        pixels: Pixel size of returned persistence image, e.g. [50, 50]
+
+    Return:
+        Vectorized representation of a persistence diagram, can be used in
+        downstream tasks like machine learning, etc.
+    """
+
+    pim = PersImage(spread=spread, pixels=pixels, weighting_type=weighting)
+
+    image = pim.transform([(x["birth"], x["death"]) for x in dgm])
+
+    return image  # vectorized persistence image

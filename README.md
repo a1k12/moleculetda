@@ -43,13 +43,12 @@ can be generated. Axes units are the same as the units of the original structure
 # spread: Gaussian spread of the kernel, pixels: size of representation (n, n),
 # weighting_type: how to weigh the persistence diagram points
 # Optional: specs can be provided to give bounds on the representation
-from moltda.vectorize_pds import PersImage
+from moltda.vectorize_pds import PersImage, pd_vectorization
 from moltda.plotting import plot_per_images
 
 pim = PersImage(spread=0.15,
             pixels=[50, 50],
-            weighting_type = 'identity',
-            verbose=False)
+            weighting_type = 'identity')
 
 # get both the 1d and 2d representations
 images = []
