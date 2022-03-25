@@ -1,4 +1,5 @@
-"""Calls that can vectorize a PD, such as to be used in an ML algorithm."""
+"""Calls that can vectorize a PD,
+ such as to be used in an ML algorithm."""
 
 import collections
 from typing import Tuple
@@ -9,11 +10,11 @@ from scipy.stats import multivariate_normal as mvn
 from scipy.stats import norm
 from sklearn.base import TransformerMixin
 
+__all__ = ["diagrams_to_arrays", "PersImage"]
+
 
 def diagrams_to_arrays(dgms):
-    """
-    Convert persistence diagram objects to persistence diagram arrays.
-    """
+    """Convert persistence diagram objects to persistence diagram arrays."""
     dgm_dtype = np.dtype([("birth", "f4"), ("death", "f4"), ("data", "u4")])
     dgm_arrays = {
         f"dim{dim}": np.array(
@@ -41,7 +42,7 @@ class PersImage(TransformerMixin):
         kernel_type: Gaussian kernel spread
         weighting_type: weighing scheme for persistence points
 
-    Return:
+    Returns:
         Vectorized persistence image
     """
 

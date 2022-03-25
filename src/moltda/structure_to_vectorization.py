@@ -5,7 +5,9 @@ from typing import Union
 
 from .construct_pd import construct_pds
 from .read_file import read_data
-from .vectorize_pds import PersImage
+from .vectorize_pds import PersImage, diagrams_to_arrays
+
+__all__ = ["structure_to_pd", "pd_vectorization"]
 
 
 def structure_to_pd(filename: Union[str, Path], supercell_size):
