@@ -1,6 +1,7 @@
 import json
 
 import numpy as np
+import pickle
 
 
 class NumpyEncoder(json.JSONEncoder):
@@ -13,3 +14,8 @@ class NumpyEncoder(json.JSONEncoder):
 def dump_json(obj, path):
     with open(path, "w") as f:
         json.dump(obj, f, cls=NumpyEncoder)
+
+
+def dump_pickle(obj, path):
+    with open(path, "wb") as f:
+        pickle.dump(obj, f)

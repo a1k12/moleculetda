@@ -40,12 +40,6 @@ def read_cif(filename: Union[str, Path]) -> Tuple[np.ndarray, np.ndarray]:
     return (lattice_matrix, xyz)
 
 
-def read_xyz(filename: Union[str, Path]):
-
-    coords = Molecule.from_file(filename)
-    return coords
-
-
 def make_supercell(
     coords: np.ndarray, lattice: Tuple[float, float, float], size: float, min_size: float = -5
 ) -> np.ndarray:
