@@ -19,3 +19,13 @@ def dump_json(obj, path):
 def dump_pickle(obj, path):
     with open(path, "wb") as f:
         pickle.dump(obj, f)
+
+
+def read_json(path):
+    with open(path, "r") as f:
+        return json.load(f)
+
+
+def read_pickle(path):
+    with open(path, "rb") as f:
+        return pickle.load(f)
