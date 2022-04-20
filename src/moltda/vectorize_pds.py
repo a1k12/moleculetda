@@ -26,11 +26,19 @@ def diagrams_to_arrays(dgms):
     return dgm_arrays
 
 
-def get_images(pd, spread: float = 0.2, weighting: str = "identity", pixels: List[int] = [50, 50]):
+def get_images(
+    pd,
+    spread: float = 0.2,
+    weighting: str = "identity",
+    pixels: List[int] = [50, 50],
+    specs: dict = None,
+):
     images = []
     for dim in [0, 1, 2, 3]:
         dgm = pd[f"dim{dim}"]
-        images.append(pd_vectorization(dgm, spread=spread, weighting=weighting, pixels=pixels))
+        images.append(
+            pd_vectorization(dgm, spread=spread, weighting=weighting, pixels=pixels, specs=specs)
+        )
     return images
 
 
@@ -204,7 +212,7 @@ class PersImage(TransformerMixin):
         return diagram
 
 
-def pd_vectorization(dgm, spread, weighting, pixels):
+def pd_vectorization(dgm, spread, weighting, pixels, specs=None):
     """
     Convert persistence diagram array to a vectorized representation.
 
@@ -215,13 +223,13 @@ def pd_vectorization(dgm, spread, weighting, pixels):
         spread: Gaussian spread.
         weighting: Scheme for weighting points in the persistence diagram.
         pixels: Pixel size of returned persistence image, e.g. [50, 50]
-
+        specs (dict): Dictionary containing maxB, maxP, minBD.
     Return:
         Vectorized representation of a persistence diagram, can be used in
         downstream tasks like machine learning, etc.
     """
 
-    pim = PersImage(spread=spread, pixels=pixels, weighting_type=weighting)
+    pim = PersImage(spread=spread, pixels=pixels, weighting_type=weighting, specs=specs)
 
     image = pim.transform([(x["birth"], x["death"]) for x in dgm])
 

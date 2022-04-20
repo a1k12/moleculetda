@@ -26,7 +26,25 @@ from .vectorize_pds import diagrams_to_arrays, pd_vectorization
     help="Gaussian spread for vectorizing persistence diagram transformation.",
     type=click.FLOAT,
 )
-def main(filename, supercell_size, spread):
+@click.option(
+    "--maxB",
+    default=18,
+    help="Maximum birth value for persistence diagram vectorization.",
+    type=click.FLOAT,
+)
+@click.option(
+    "--maxP",
+    default=18,
+    help="Maximum persistence value for persistence diagram vectorization.",
+    type=click.FLOAT,
+)
+@click.option(
+    "--minB",
+    default=0,
+    help="Minimum birth value for persistence diagram vectorization.",
+    type=click.FLOAT,
+)
+def main(filename, supercell_size, spread, maxB, maxP, minB):
     """
     Convert a molecule/structurefile to vecotrized persistence diagrams.
     """
@@ -40,7 +58,15 @@ def main(filename, supercell_size, spread):
     images = []
     for dim in [0, 1, 2, 3]:
         dgm = np_dgms[f"dim{dim}"]
-        images.append(pd_vectorization(dgm, spread=spread, weighting="identity", pixels=[50, 50]))
+        images.append(
+            pd_vectorization(
+                dgm,
+                spread=spread,
+                weighting="identity",
+                pixels=[50, 50],
+                specs={"maxB": maxB, "maxP": maxP, "minBD": minB},
+            )
+        )
 
     result = {
         "diagrams": np_dgms,
