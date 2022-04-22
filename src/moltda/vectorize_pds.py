@@ -31,13 +31,15 @@ def get_images(
     spread: float = 0.2,
     weighting: str = "identity",
     pixels: List[int] = [50, 50],
-    specs: dict = None,
+    specs: List[dict] = None,
 ):
     images = []
     for dim in [0, 1, 2, 3]:
         dgm = pd[f"dim{dim}"]
         images.append(
-            pd_vectorization(dgm, spread=spread, weighting=weighting, pixels=pixels, specs=specs)
+            pd_vectorization(
+                dgm, spread=spread, weighting=weighting, pixels=pixels, specs=specs[dim]
+            )
         )
     return images
 
