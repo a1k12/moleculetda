@@ -6,23 +6,33 @@ from typing import Tuple, Union
 
 import numpy as np
 from pymatgen.core import Molecule, Structure
+from loguru import logger
+from pymatgen.transformations.advanced_transformations import CubicSupercellTransformation
 
 
 def read_data(
     filename: Union[str, Path],
     size: Union[Tuple[int], None] = None,
     supercell: bool = False,
+    periodic: bool = False,
 ) -> np.ndarray:
     """
     Args:
         filename (str, Path): currently supports cif, .npy
         size (Tuple[int], None): if creating a cubic supercell, size of the cell. Defaults to None
         supercell (bool): if creating a supercell, only supported by ".cif" option for now
+        periodic (bool): if creating a periodic supercell, only supported by ".cif" option for now
     """
     filename = Path(filename)
     if filename.suffix == ".cif":
         if supercell:
             lattice_matrix, xyz = read_cif(filename)
+            if periodic:
+                s = Structure.from_file(filename)
+                supercell_structure = CubicSupercellTransformation(
+                    min_length=size
+                ).apply_transformation(s)
+                return supercell_structure.frac_coords
             return make_supercell(xyz, lattice_matrix, size)
         else:
             return read_cif(filename)[1]  # xyz coordinates
@@ -35,6 +45,7 @@ def read_data(
 def read_cif(filename: Union[str, Path]) -> Tuple[np.ndarray, np.ndarray]:
 
     structure = Structure.from_file(filename)
+
     lattice_matrix = structure.lattice.matrix
     xyz = structure.cart_coords
     return (lattice_matrix, xyz)
