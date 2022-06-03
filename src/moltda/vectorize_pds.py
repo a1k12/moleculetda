@@ -18,7 +18,9 @@ def diagrams_to_arrays(dgms):
     dgm_dtype = np.dtype([("birth", "f4"), ("death", "f4"), ("data", "u4")])
     dgm_arrays = {
         f"dim{dim}": np.array(
-            [(np.sqrt(p.birth), np.sqrt(p.death), p.data) for p in dgm] if dgm else [],
+            [(np.sqrt(dgm[i].birth), np.sqrt(dgm[i].death), dgm[i].data) for i in range(len(dgm))]
+            if dgm
+            else [],
             dtype=dgm_dtype,
         )
         for dim, dgm in enumerate(dgms)
