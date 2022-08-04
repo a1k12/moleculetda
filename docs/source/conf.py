@@ -22,7 +22,7 @@ sys.path.insert(0, os.path.abspath("../../src"))
 
 # -- Project information -----------------------------------------------------
 
-project = "moltda"
+project = "moleculetda"
 copyright = f"{date.today().year}, The Regents of the University of California"
 author = "Aditi Krishnapriyan"
 
@@ -50,7 +50,7 @@ if parsed_version.group("release"):
 add_module_names = False
 
 # A list of prefixes that are ignored when creating the module index. (new in Sphinx 0.6)
-modindex_common_prefix = ["moltda."]
+modindex_common_prefix = ["moleculetda."]
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
@@ -137,7 +137,7 @@ if os.path.exists("logo.png"):
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = "moltdadoc"
+htmlhelp_basename = "moleculetdadoc"
 
 # -- Options for LaTeX output ------------------------------------------------
 
@@ -165,8 +165,8 @@ htmlhelp_basename = "moltdadoc"
 # latex_documents = [
 #     (
 #         master_doc,
-#         'moltda.tex',
-#         'moltda Documentation',
+#         'moleculetda.tex',
+#         'moleculetda Documentation',
 #         author,
 #         'manual',
 #     ),
@@ -179,8 +179,8 @@ htmlhelp_basename = "moltdadoc"
 man_pages = [
     (
         master_doc,
-        "moltda",
-        "moltda Documentation",
+        "moleculetda",
+        "moleculetda Documentation",
         [author],
         1,
     ),
@@ -194,8 +194,8 @@ man_pages = [
 texinfo_documents = [
     (
         master_doc,
-        "moltda",
-        "moltda Documentation",
+        "moleculetda",
+        "moleculetda Documentation",
         author,
         "Victoria Gill, Kevin Maik Jablonka",
         "Predicting gasification properties of biomasses",

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-"""Version information for :mod:`moltda`.
+"""Version information for :mod:`moleculetda`.
 
-Run with ``python -m moltda.version``
+Run with ``python -m moleculetda.version``
 """
 
 import os
@@ -18,7 +18,7 @@ VERSION = "0.1.0"
 
 
 def get_git_hash() -> str:
-    """Get the :mod:`moltda` git hash."""
+    """Get the :mod:`moleculetda` git hash."""
     with open(os.devnull, "w") as devnull:
         try:
             ret = check_output(  # noqa: S603,S607
@@ -33,7 +33,7 @@ def get_git_hash() -> str:
 
 
 def get_version(with_git_hash: bool = False):
-    """Get the :mod:`moltda` version string, including a git hash."""
+    """Get the :mod:`moleculetda` version string, including a git hash."""
     return f"{VERSION}-{get_git_hash()}" if with_git_hash else VERSION
 
 

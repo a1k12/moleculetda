@@ -4,21 +4,21 @@ Usage
 I/O
 ------
 
-.. automodule:: moltda.read_file
+.. automodule:: moleculetda.read_file
     :members:
 
 
 Construct Persistence Diagrams
 -------------------------------
 
-.. automodule:: moltda.construct_pd
+.. automodule:: moleculetda.construct_pd
     :members:
 
 
 Vectorize Persistence Diagrams
 ---------------------------------
 
-.. automodule:: moltda.vectorize_pds
+.. automodule:: moleculetda.vectorize_pds
     :members:
 
 
@@ -26,12 +26,12 @@ Vectorize Persistence Diagrams
 Directly going from structure to vectorized persistence diagram
 ------------------------------------------------------
 
-.. automodule:: moltda.structure_to_vectorization
+.. automodule:: moleculetda.structure_to_vectorization
     :members:
 
 
 Plotting
 ----------
 
-.. automodule:: moltda.plotting
+.. automodule:: moleculetda.plotting
     :members:

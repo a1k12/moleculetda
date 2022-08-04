@@ -5,9 +5,9 @@ or adding code to the project.
 
 Having a Problem? Submit an Issue.
 ----------------------------------
-1. Check that you have the latest version of :code:`moltda`
+1. Check that you have the latest version of :code:`moleculetda`
 2. Check that StackOverflow hasn't already solved your problem
-3. Go here: https://github.com/a1k12/moltda/issues
+3. Go here: https://github.com/a1k12/moleculetda/issues
 4. Check that this issue hasn't been solved
 5. Click "new issue"
 6. Add a short, but descriptive title
@@ -22,19 +22,19 @@ Same drill! Submit an issue and we'll have a nice conversation in the thread.
 Want to Contribute?
 -------------------
 1. Get the code. Fork the repository from GitHub using the big green button in the top-right corner of
-   https://github.com/a1k12/moltda
+   https://github.com/a1k12/moleculetda
 2. Clone your directory with
 
 .. code-block:: sh
 
-    $ git clone https://github.com/<YourUsername>/moltda
+    $ git clone https://github.com/<YourUsername>/moleculetda
 
 3. Install with :code:`pip`. The flag, :code:`-e`, makes your installation editable, so your changes will be reflected
    automatically in your installation.
 
 .. code-block:: sh
 
-    $ cd moltda
+    $ cd moleculetda
     $ python3 -m pip install -e .
 
 4. Make a branch off of develop, then make contributions! This line makes a new branch and checks it out
@@ -61,7 +61,7 @@ pull request and perhaps make comments about it, request changes, or may pull it
 to make changes to your pull request, simply push more commits to the feature branch in your fork to GitHub and they
 will automatically be added to the pull. You do not need to close and reissue your pull request to make changes!
 
-If you spend a while working on your changes, further commits may be made to the main :code:`moltda`
+If you spend a while working on your changes, further commits may be made to the main :code:`moleculetda`
 repository (called "upstream") before you can make your pull request. In keep your fork up to date with upstream by
 pulling the changes--if your fork has diverged too much, it becomes difficult to properly merge pull requests without
 conflicts.
@@ -70,7 +70,7 @@ To pull in upstream changes:
 
 .. code-block:: sh
 
-    $ git remote add upstream https://github.com/a1k12/moltda
+    $ git remote add upstream https://github.com/a1k12/moleculetda
     $ git fetch upstream develop
 
 Check the log to make sure the upstream changes don't affect your work too much:

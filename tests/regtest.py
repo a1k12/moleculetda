@@ -1,6 +1,6 @@
 import numpy as np
 
-from moltda.structure_to_vectorization import structure_to_pd
+from moleculetda.structure_to_vectorization import structure_to_pd
 
 
 def test_regression_mof_tda(mof_path):

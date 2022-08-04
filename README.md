@@ -1,4 +1,4 @@
-# moltda
+# moleculetda
 A framework to use topological data analysis to extract topological information
 from a structure (e.g., molecule or crystal), which can then be used in
 downstream tasks.
@@ -16,7 +16,7 @@ construct topological summaries of all the channels and voids in the structure:
 Persistence diagrams can be generated from an example structure file such as a `.cif` file.
 
 ```python
-from moltda.structure_to_vectorization import structure_to_pd
+from moleculetda.structure_to_vectorization import structure_to_pd
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -43,8 +43,8 @@ can be generated. Axes units are the same as the units of the original structure
 # spread: Gaussian spread of the kernel, pixels: size of representation (n, n),
 # weighting_type: how to weigh the persistence diagram points
 # Optional: specs can be provided to give bounds on the representation
-from moltda.vectorize_pds import PersImage, pd_vectorization
-from moltda.plotting import plot_per_images
+from moleculetda.vectorize_pds import PersImage, pd_vectorization
+from moleculetda.plotting import plot_per_images
 
 pim = PersImage(spread=0.15,
             pixels=[50, 50],

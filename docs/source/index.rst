@@ -1,4 +1,4 @@
-moltda |release| Documentation
+moleculetda |release| Documentation
 =================================
 
 .. toctree::

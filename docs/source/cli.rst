@@ -1,8 +1,8 @@
 Command Line Interface
 ======================
-moltda automatically installs the command :code:`moltda`. See
-:code:`moltda --help` for usage details.
+moleculetda automatically installs the command :code:`moleculetda`. See
+:code:`moleculetda --help` for usage details.
 
-.. click:: moltda.cli:main
-   :prog: moltda
+.. click:: moleculetda.cli:main
+   :prog: moleculetda
    :show-nested:

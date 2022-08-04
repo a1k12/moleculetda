@@ -4,7 +4,7 @@
 
 import unittest
 
-from moltda.version import get_version
+from moleculetda.version import get_version
 
 
 class TestVersion(unittest.TestCase):
