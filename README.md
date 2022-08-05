@@ -11,7 +11,7 @@ downstream tasks.
 As an example, we will start with the following metal-organic framework (MOF) and
 construct topological summaries of all the channels and voids in the structure:
 
-<img src="https://github.com/a1k12/moleculetda/blob/main/figures/str_m4_o1_o1_acs_sym.10.png" width="500">
+<img src="https://github.com/a1k12/moleculetda/blob/main/examples/figures/str_m4_o1_o1_acs_sym.10.png" width="500">
 
 Persistence diagrams can be generated from an example structure file such as a `.cif` file.
 
@@ -32,7 +32,7 @@ dgm_2d = arr_dgms['dim2']
 plot_pds(dgm_1d, dgm_2d)
 ```
  ̰
-<img src="https://github.com/a1k12/moleculetda/blob/main/figures/1d_2d_pers_diagrams.png" width="750">
+<img src="https://github.com/a1k12/moleculetda/blob/main/examples/figures/1d_2d_pers_diagrams.png" width="750">
 
 
 Starting from `arr_dgms` (dict storing the persistence diagrams), vectorized representations
@@ -59,7 +59,7 @@ for dim in [1, 2]:
 plot_pers_images(images, arr_dgms)
 ```
 
-<img src="https://github.com/a1k12/moleculetda/blob/main/figures/1d_2d_pers_images.png" width="750">
+<img src="https://github.com/a1k12/moleculetda/blob/main/examples/figures/1d_2d_pers_images.png" width="750">
 
 The resulting 1d and 2d image representations can be used for other tasks.
 
