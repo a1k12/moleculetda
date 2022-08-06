@@ -9,7 +9,7 @@ I/O
 
 
 Construct Persistence Diagrams
--------------------------------
+----------------------------------
 
 .. automodule:: moleculetda.construct_pd
     :members:
@@ -24,7 +24,7 @@ Vectorize Persistence Diagrams
 
 
 Directly going from structure to vectorized persistence diagram
-------------------------------------------------------
+----------------------------------------------------------------
 
 .. automodule:: moleculetda.structure_to_vectorization
     :members:

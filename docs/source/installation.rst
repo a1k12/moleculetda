@@ -11,12 +11,12 @@ The most recent code and data can be installed directly from GitHub with:
 
 .. code-block:: shell
 
-    $ pip install git+https://github.com/kjappelbaum/moleculetda.git
+    $ pip install git+https://github.com/a1k12/moleculetda.git
 
 To install in development mode, use the following:
 
 .. code-block:: shell
 
-    $ git clone git+https://github.com/kjappelbaum/moleculetda.git
+    $ git clone git+https://github.com/a1k12/moleculetda.git
     $ cd moleculetda
     $ pip install -e .

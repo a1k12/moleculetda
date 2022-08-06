@@ -1,5 +1,5 @@
 moleculetda |release| Documentation
-=================================
+=======================================
 
 .. toctree::
    :maxdepth: 2
@@ -8,7 +8,6 @@ moleculetda |release| Documentation
 
    installation
    usage
-   cli
 
 Indices and Tables
 ------------------

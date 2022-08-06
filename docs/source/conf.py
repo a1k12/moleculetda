@@ -23,18 +23,18 @@ sys.path.insert(0, os.path.abspath("../../src"))
 # -- Project information -----------------------------------------------------
 
 project = "moleculetda"
-copyright = f"{date.today().year}, The Regents of the University of California"
-author = "Aditi Krishnapriyan"
+copyright = f"{date.today().year}, Aditi Krishnapriyan "
+author = "Aditi Krishnapriyan "
 
 # The full version, including alpha/beta/rc tags.
-release = "0.1.0"
+release = "0.0.1-dev"
 
 # The short X.Y version.
 parsed_version = re.match(
-    "(?P<major>\d+)\.(?P<minor>\d+)\.(?P<patch>\d+)(?:-(?P<release>[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+(?P<build>[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?",
+    r"(?P<major>\d+)\.(?P<minor>\d+)\.(?P<patch>\d+)(?:-(?P<release>[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+(?P<build>[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?",
     release,
 )
-version = parsed_version.expand("\g<major>.\g<minor>.\g<patch>")
+version = parsed_version.expand(r"\g<major>.\g<minor>.\g<patch>")
 
 if parsed_version.group("release"):
     tags.add("prerelease")
@@ -56,22 +56,32 @@ modindex_common_prefix = ["moleculetda."]
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    "sphinx.ext.autosummary",
     "sphinx.ext.autodoc",
-    "sphinx.ext.coverage",
-    "sphinx.ext.intersphinx",
-    "sphinx.ext.todo",
-    "sphinx.ext.mathjax",
-    "sphinx.ext.viewcode",
+    "sphinx.ext.napoleon",
     "sphinx_autodoc_typehints",
-    "sphinx_click.ext",
-    "sphinx_automodapi.automodapi",
-    "sphinx_automodapi.smart_resolver",
-    # 'texext',
+    "sphinxcontrib.katex",
+    "sphinx_copybutton",
+    "sphinx.ext.viewcode",
+    "sphinx.ext.autosectionlabel",
+    "sphinx.ext.intersphinx",
 ]
+
+intersphinx_mapping = {
+    "pandas": ("https://pandas.pydata.org/docs/", None),
+    "sklearn": ("https://scikit-learn.org/stable/", None),
+    "numpy": ("https://numpy.org/doc/stable/", None),
+    "scipy": ("https://docs.scipy.org/doc/scipy/", None),
+}
+
+autodoc_type_aliases = {"ArrayLike": "numpy.typing.ArrayLike"}
+
+copybutton_selector = "div:not(.no-copy)>div.highlight pre"
+copybutton_prompt_text = r">>> |\.\.\. |\$ |In \[\d*\]: | {2,5}\.\.\.: | {5,8}: "
+copybutton_prompt_is_regexp = True
 
 # generate autosummary pages
 autosummary_generate = True
+
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
@@ -90,7 +100,7 @@ master_doc = "index"
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = "en"
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -100,18 +110,25 @@ exclude_patterns = []
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = "sphinx"
 
+
+needs_table_style = "datatables"
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = "sphinx_rtd_theme"
+html_theme = "furo"
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-# html_theme_options = {}
+html_theme_options = {
+    "globaltoc_collapse": False,
+    "source_repository": "https://github.com/a1k12/moleculetda/",
+    "source_branch": "main",
+    "source_directory": "docs/source",
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -131,8 +148,8 @@ html_theme = "sphinx_rtd_theme"
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
 #
-if os.path.exists("logo.png"):
-    html_logo = "logo.png"
+if os.path.exists("figures/logo.png"):
+    html_logo = "figures/logo.png"
 
 # -- Options for HTMLHelp output ---------------------------------------------
 
@@ -197,8 +214,8 @@ texinfo_documents = [
         "moleculetda",
         "moleculetda Documentation",
         author,
-        "Victoria Gill, Kevin Maik Jablonka",
-        "Predicting gasification properties of biomasses",
+        "Aditi Krishnapriyan",
+        "Toolkit for using topological data analysis representations",
         "Miscellaneous",
     ),
 ]
@@ -222,12 +239,6 @@ texinfo_documents = [
 
 # -- Extension configuration -------------------------------------------------
 
-# -- Options for intersphinx extension ---------------------------------------
-
-# Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {
-    "https://docs.python.org/3/": None,
-}
 
 autoclass_content = "both"
 
