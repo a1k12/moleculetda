@@ -15,7 +15,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install libcgal-dev
-        run: sudo apt-get install -y libcgal-dev liboost-all-dev
+        run: sudo apt-get install libcgal-dev
       - name: Install dependencies
         run: |
           pip install pre-commit
@@ -35,6 +35,8 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
+      - name: Install libcgal-dev
+        run: sudo apt-get install libcgal-dev
       - name: Install dependencies
         run: pip install tox
       - name: Test with pytest
