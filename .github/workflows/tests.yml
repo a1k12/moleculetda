@@ -38,6 +38,8 @@ jobs:
       - name: Install libcgal-dev
         run: sudo apt-get install libcgal-dev
       - name: Install dependencies
-        run: pip install tox coverage pytest pytest-cov
+        run: |
+          pip install pytest 
+          pip install -e .
       - name: Test with pytest
-        run: tox -e py
+        run: pytest tests
