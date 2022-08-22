@@ -5,6 +5,11 @@ downstream tasks.
 
 ## Installation
 
+The library can be installed as follows:
+
+```
+pip install moleculetda
+```
 
 ## Examples
 
