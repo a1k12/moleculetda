@@ -66,7 +66,15 @@ def make_supercell(
     Returns:
         new_cell: supercell array
     """
-    a, b, c = lattice
+
+    # handle potential weights that we want to carry over but not change
+    a_, b_, c_ = lattice
+    a = np.zeros(coords.shape[1])
+    a[:3] = a_
+    b = np.zeros(coords.shape[1])
+    b[:3] = b_
+    c = np.zeros(coords.shape[1])
+    c[:3] = c_
 
     xyz_periodic_copies = []
     xyz_periodic_copies.append(coords)
