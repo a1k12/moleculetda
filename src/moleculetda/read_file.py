@@ -40,7 +40,7 @@ def read_data(
                     weights = np.array([site.specie.atomic_radius for site in supercell_structure])
                 return supercell_structure.frac_coords, weights
             if weighted:
-                coords_hstack = np.hstack((xyz, weights))
+                coords_hstack = np.hstack((xyz, weights.reshape(-1, 1)))
                 coords_ = make_supercell(coords_hstack, lattice_matrix, size)
                 return coords_[:, :3], coords_[:, 3]
             else:
