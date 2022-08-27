@@ -1,5 +1,6 @@
 import numpy as np
 import pytest
+
 from moleculetda.structure_to_vectorization import structure_to_pd
 
 

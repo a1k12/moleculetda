@@ -13,6 +13,6 @@ def mof_path():
 @pytest.fixture()
 def hkust_paths():
     return [
-        os.path.join(THIS_DIR, "test_files", "HKUST-1-Ni.cif"),
+        os.path.join(THIS_DIR, "test_files", "HKUST-1-La.cif"),
         os.path.join(THIS_DIR, "test_files", "HKUST-1.cif"),
     ]
