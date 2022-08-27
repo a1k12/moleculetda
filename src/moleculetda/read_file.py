@@ -43,7 +43,6 @@ def read_data(
                 coords_hstack = np.hstack((xyz, weights.reshape(-1, 1)))
 
                 coords_ = make_supercell(coords_hstack, lattice_matrix, size)
-                print(weights)
                 return coords_[:, :3], coords_[:, 3]
             else:
                 return make_supercell(xyz, lattice_matrix, size), weights
