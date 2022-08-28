@@ -15,25 +15,37 @@ def read_data(
     size: Union[Tuple[int], None] = None,
     supercell: bool = False,
     periodic: bool = False,
-) -> np.ndarray:
+    weighted: bool = False,
+) -> Tuple[np.ndarray, Union[np.ndarray, None]]:
     """
     Args:
         filename (str, Path): currently supports cif, .npy
         size (Tuple[int], None): if creating a cubic supercell, size of the cell. Defaults to None
         supercell (bool): if creating a supercell, only supported by ".cif" option for now
         periodic (bool): if creating a periodic supercell, only supported by ".cif" option for now
+        weighted (bool): If True, use weighted alpha shapes.
+            The weighting will default to atomic radii.
     """
+    weights = None
     filename = Path(filename)
     if filename.suffix == ".cif":
         if supercell:
-            lattice_matrix, xyz = read_cif(filename)
+            lattice_matrix, xyz, weights = read_cif(filename, weighted=weighted)
             if periodic:
                 s = Structure.from_file(filename)
                 supercell_structure = CubicSupercellTransformation(
                     min_length=size
                 ).apply_transformation(s)
-                return supercell_structure.frac_coords
-            return make_supercell(xyz, lattice_matrix, size)
+                if weighted:
+                    weights = np.array([site.specie.atomic_radius for site in supercell_structure])
+                return supercell_structure.frac_coords, weights
+            if weighted:
+                coords_hstack = np.hstack((xyz, weights.reshape(-1, 1)))
+
+                coords_ = make_supercell(coords_hstack, lattice_matrix, size)
+                return coords_[:, :3], coords_[:, 3]
+            else:
+                return make_supercell(xyz, lattice_matrix, size), weights
         else:
             return read_cif(filename)[1]  # xyz coordinates
     elif filename.suffix == ".npy":
@@ -42,13 +54,18 @@ def read_data(
         raise NotImplementedError("Other file types not implemented.")
 
 
-def read_cif(filename: Union[str, Path]) -> Tuple[np.ndarray, np.ndarray]:
+def read_cif(
+    filename: Union[str, Path], weighted
+) -> Tuple[np.ndarray, np.ndarray, Union[None, np.ndarray]]:
 
     structure = Structure.from_file(filename)
-
+    if weighted:
+        weights = np.array([site.specie.atomic_radius for site in structure])
+    else:
+        weights = None
     lattice_matrix = structure.lattice.matrix
     xyz = structure.cart_coords
-    return (lattice_matrix, xyz)
+    return (lattice_matrix, xyz, weights)
 
 
 def make_supercell(
